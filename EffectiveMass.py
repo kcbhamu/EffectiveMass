@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*-coding:utf-8-*-
 
-__version__ = "v1.01"
+__version__ = "v1.01.1"
 __author__ = "LiuJia"
 
 __str__ = """
@@ -24,8 +24,7 @@ python EffectiveMass.py -p "project_directory" [-s "xsd_file"] [-c "bs_xcd_file"
 3. Options "-s" ("--xsd") and "-c" ("--xcd") are not essential
    if you don't change the project directory or file names.
    The default names of "xsd_file" and "bs_xcd_file" are
-   "'project_name'.xsd" and "'project_name' BandStr.outmol" (under DMol3)
-   (or "'project_name' Band Structure.xcd" (under CASTEP)), respectively.
+   "'project_name'.xsd" and "'project_name' Band Structure.xcd", respectively.
 4. Options "-h" ("--help") and "-v" ("--version") are used to view the manuscript and
    check the version of EffectiveMass, respectively.
 
