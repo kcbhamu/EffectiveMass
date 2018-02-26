@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*-coding:utf-8-*-
 
-__version__ = "v1.01.1"
+__version__ = "v1.01.2"
 __author__ = "LiuJia"
 
 __str__ = """
-********** MANUSCRIPT **********
+********** HELP MANUSCRIPT **********
 
 A simple Python script used to calculate effective masses automatically.
 This script is released under GPL v3.0 license.
@@ -19,16 +19,21 @@ python EffectiveMass.py -p "project_directory" [-s "xsd_file"] [-c "bs_xcd_file"
 
 1. This script would create a new file named "'project_name' Effective Mass.out"
    in the specified project directory, which contains the calculation results.
-2. Option "-p" (or "--project") is required to specify the project directory (i.e. "project_directory")
-   which contains your calculated model file ("xsd_file") and band structure file ("bs_xcd_file").
-3. Options "-s" ("--xsd") and "-c" ("--xcd") are not essential
-   if you don't change the project directory or file names.
-   The default names of "xsd_file" and "bs_xcd_file" are
-   "'project_name'.xsd" and "'project_name' Band Structure.xcd", respectively.
-4. Options "-h" ("--help") and "-v" ("--version") are used to view the manuscript and
-   check the version of EffectiveMass, respectively.
 
-************* END *************
+2. Option "-p" (or "--project") is required to specify the project directory
+   (i.e. "project_directory") which contains your calculated model file ("xsd_file")
+   and band structure file ("xcd_file").
+
+3. Options "-s" ("--xsd") and "-c" ("--xcd") are used to specify the "xsd_file" and "xcd_file",
+   which are not essential options if you didn't rename the project directory or files.
+   The default names of "xsd_file" and "xcd_file" are "'project_name'.xsd"
+   and "'project_name' Band Structure.xcd", respectively.
+
+4. Options "-h" ("--help") and "-v" ("--version") are used to view the help manuscript
+   and check the version of EffectiveMass, respectively.
+
+
+**************** END ****************
 """
 
 import math
@@ -654,7 +659,7 @@ if __name__ == '__main__':
             project_directory = value
         elif op in ("-s", "--xsd"):
             model_xsd_file = value
-        elif op in ("-c", "--bs_xcd"):
+        elif op in ("-c", "--xcd"):
             bandstr_xcd_file = value
         else:
             raise ValueError("Invalid option: %s." % op)
