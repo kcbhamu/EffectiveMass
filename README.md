@@ -1,45 +1,104 @@
 # EffectiveMass
-A simple Python script used to calculate effective masses of electron and hole on valence and conduction bands automatically.
+A script used to calculate effective masses of holes and electrons automatically.
 
 ## Version
-EffectiveMass v1.01.2
+EffectiveMass v2.0.0
 
 ## Python Version
 Python 3.6 or later.
 
 ## Installation
-1. Move EffectiveMass to a directory where you can reach.
-2. Add EffectiveMass to $PATH variable in your system environment and chmod "EffectiveMass.py" script to make it executable. (Optional)
-3. Open command (CMD, in Windows) or bash shell (in Linux) and type the command below. It would echo "EffectiveMass v1.01.2" (i.e. the version of EffectiveMass) if it is successfully installed.
+1. Move EffectiveMass to a reachable folder.
+2. Add EffectiveMass to $PATH variable in your system environment and chmod "EffectiveMass.py" script to make it executable. (Optional in Linux)
+3. Open command (CMD, in Windows) or bash shell (in Linux) and type the command below. It would echo "EffectiveMass v2.0.0" (i.e. the version of EffectiveMass.py) if it is successfully installed.
 ```Bash
-# Windows
-python C:\\path\\to\\EffectiveMass.py --version
-# Linux
-EffectiveMass.py --version
+python EffectiveMass.py --version
 ``` 
 
-## Command
+## Usage
 ```bash
 python EffectiveMass.py -p "project_directory" [-s "xsd_file"] [-c "xcd_file"] [-h] [-v]
 ```
-* This script would create a new file named "'project_name' Effective Mass.out" in the specified project directory, which contains the calculation results.
-* Option "-p" (or "--project") is required to specify the project directory (i.e. "project_directory") which contains your calculated model file ("xsd_file") and band structure file ("xcd_file").
-* Options "-s" ("--xsd") and "-c" ("--xcd") are used to specify the "xsd_file" and "xcd_file", which are not essential options if you didn't rename the project directory or files. The default names of "xsd_file" and "xcd_file" are "'project_name'.xsd" and "'project_name' Band Structure.xcd", respectively.
-* Options "-h" ("--help") and "-v" ("--version") are used to view the help manuscript and check the version of EffectiveMass, respectively.
+#### Output
+  This script would create a result file named "XXX Effective Mass.out" in project directory.
+
+#### Options
+* **-p (or --project):**
+  This is a required option to indicate the project directory.
+  The name of project should follow the naming scheme.
+  For example,
+  ```bash
+  python EffectiveMass.py -p "/path/to/XXX DMol3 GeomOpt"
+  ```
+  See also "project_directory" parameter.
+
+* **-s (or --xsd):**
+  This is an optional option to indicate the model file with xsd extending.
+  Default loading "XXX.xsd" in project directory if model file is not specified.
+  For example,
+  ```bash
+  python EffectiveMass.py -p "/path/to/XXX DMol3 GeomOpt" -s "XXX(2).xsd"
+  ```
+  See also "md_xsd_file" parameter.
+
+* **-c (or --xcd):**
+  This is an optional option to indicate the model file with xsd extending.
+  Default loading "XXX Band Structure.xcd" in project directory if band structure file is not specified.
+  For example,
+  ```bash
+  python EffectiveMass.py -p "/path/to/XXX DMol3 GeomOpt" -c "XXX Band Structure(2).xcd"
+  ```
+  See also "bs_xcd_file" parameter.
+
+* **-h (or --help):**
+  This is an optional option without parameters to view the help manuscript.
+  For example,
+  ```bash
+  python EffectiveMass.py -h
+  ```
+* **-v (or --version):**
+  This is an optional option without parameters to check the version of EffectiveMass.py script.
+  For example,
+  ```bash
+  python EffectiveMass.py -v
+  ```
+  
+#### Parameters
+* **project directory ("project_directory"):**
+  The full path of project directory.
+  This script supports project calculated by DMol3 (or CASTEP) code with GeomOpt (or Energy) method.
+  So the project name should contains both code and method name as the ending words.
+  For example, "XXX DMol3 GeomOpt" is accepted, but "XXX", "DMol3 GeomOpt", "XXX DMol3" or "XXX GeomOpt", etc. are illegal.
+  The project directory should be indicated manually by using "-p" option in this script.
+  See also "-p (or --project)" option.
+
+* **model file with xsd extending ("md_xsd_file"):**
+  The full name of model file.
+  The model file should be contained in the project directory and the full name is default as "XXX.xsd".
+  This file is generated automatically by running DMol3 (or CASTEP) Calculation.
+  If you want to specify another model file such as "XXX(2).xsd", please use "-s" option.
+  See also "-s (or --xsd)" option.
+
+* **band structure file with xcd extending ("bs_xcd_file"):**
+  The full name of band structure file.
+  The band structure file should be contained in the project directory and the full name is default as "XXX Band Structure.xcd".
+  This file is generated automatically by running DMol3 (or CASTEP) Analysis.
+  If you want to specify another band structure file such as "XXX Band Structure(2).xcd", please use "-c" option.
+  See also "-c (or --xcd)" option.
 
 ## Mechanism
 The effective mass is calculated by![effective_mass](https://github.com/liujiacode/EffectiveMass/blob/master/figures/effective_mass.jpg).
 
-## Attention
+## Notice
 1. Currently only DMol3 and CASTEP codes in Materials Studio (MS) are supported.
 
-2. Before running this script, you should calculate the band structure of a specified crystal model in MS first. The calculation directory (i.e. "project_directory") should be reachable and contains model file (i.e. "xsd_file", "'project_name'.xsd") and band structure file (i.e. "xcd_file", "'project_name' Band Structure.xcd", which could be generated by "Analysis - Band Structure" option).
+2. The project directory should be reachable and contains model file ("md_xsd_file") and band structure file ("bs_xcd_file", which could be generated by "Analysis - Band Structure" option in MS). See also Parameters.
 
-3. Atom unit (a.u.) is used in this calculation, i.e. energy is in Ha (Hartree), effective mass is in me (free electron mass) and distance is in bohr. Don't worry about the conversion of unit, this script would do it automatically.
+3. If the names of model and band structure files have been changed, or if you want to specify other files in project directory, please use "-s" and "-c" options. See also Options.
 
-3. If the names of project directory or files have been changed, you should specify the file names manually in calculation by using "-s" and "-c" options.
+4. Atom unit (a.u.) is used in this calculation, i.e. energy is in Ha (Hartree), effective mass is in m0 (effective mass of a free electron) and distance is in bohr. Don't worry about the conversion of units, this script would do it automatically.
 
-4. Derivatives in this script is calculated simply without interpolation. So the results would be more accurate if **more band structure points (lower separations)** are calculated when performing **the DMol3 or CASTEP code (not this script)**. Also, you can calculate the derivatives by Origin or other softwares manually. The results calculated by Origin **might not** equal to the results calculated by this script because of different deriative-performing methods.
+5. Derivatives in this script is calculated simply without interpolation. So the results would be more accurate if **more band structure points (lower separations)** are calculated in performing **the DMol3 or CASTEP code (not this script)**. Also, you can calculate the derivatives by Origin or other softwares manually. The results calculated by Origin **might not** equal to the results calculated by this script because of different deriative-performing methods.
 
 ## Author
 LiuJia
@@ -49,3 +108,6 @@ https://github.com/liujiacode/EffectiveMass
 
 ## License
 This script is released under GPL v3.0 license.
+
+## Updates
+* **v2.0.0:** The calculations of hole and electron effective masses are confused in v1.x.x, and they have been corrected in v2.0.0.
