@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*-coding:utf-8-*-
 
-__version__ = "v2.0.0"
+__version__ = "v2.0.1"
 __author__ = "LiuJia"
 
 __str__ = """
@@ -75,8 +75,12 @@ band structure file with xcd extending ("bs_xcd_file"):
 
 """
 v2.0.0 UPDATE:
-  The calculations of hole and electron effective masses are confused in v1.x.x, and they have been corrected
-  in v2.0.0.
+  The calculations of hole and electron effective masses are confused in v1.x.x, 
+  and they have been corrected in v2.0.0.
+
+v2.0.1 UPDATE:
+  Sometimes x index in band structure end up with 0.99999... instead of 1.0, 
+  which would lead to error "Unknown length of x axis" in v2.0.0 or older.
 """
 
 import math
@@ -190,6 +194,11 @@ class Vector(object):
 
 class EffectiveMass(object):
     def __init__(self, project):
+        # calculating precision
+        self._cal_precision = 1e-3
+        # Processing precision
+        self._pro_precision = 1e-6
+
         if os.path.isdir(project):
             self._project = project
         else:
@@ -306,7 +315,7 @@ class EffectiveMass(object):
         for each_point in point_2d:
             x, y = [float(i) for i in each_point.xpath("@xy")[0].split(',')]
             x_axis.append(x)
-            if x == 1:
+            if abs(x - 1) < self._pro_precision:
                 break
         x_axis_len = len(x_axis)
         # Each group of band data has one waste record like "<POINT_2D XY="0,1e+308"/>".
@@ -357,7 +366,7 @@ class EffectiveMass(object):
         else:
             raise ValueError("Title is mismatching: %s." % plot_title)
         calculated_band_gap_num = min(conduction_band) - max(valence_band)
-        if abs(calculated_band_gap_num - band_gap_num) > 0.001:
+        if abs(calculated_band_gap_num - band_gap_num) > self._cal_precision:
             raise ValueError("Invalid calculated band gap value: %s." % calculated_band_gap_num)
 
         # Loading k path labels (high symmetry points in band structure files).

@@ -2,7 +2,7 @@
 A script used to calculate effective masses of holes and electrons automatically.
 
 ## Version
-EffectiveMass v2.0.0
+EffectiveMass v2.0.1
 
 ## Python Version
 Python 3.6 or later.
@@ -10,7 +10,7 @@ Python 3.6 or later.
 ## Installation
 1. Move EffectiveMass to a reachable folder.
 2. Add EffectiveMass to $PATH variable in your system environment and chmod "EffectiveMass.py" script to make it executable. (Optional in Linux)
-3. Open command (CMD, in Windows) or bash shell (in Linux) and type the command below. It would echo "EffectiveMass v2.0.0" (i.e. the version of EffectiveMass.py) if it is successfully installed.
+3. Open command (CMD, in Windows) or bash shell (in Linux) and type the command below. It would echo "EffectiveMass v2.0.1" (i.e. the version of EffectiveMass.py) if it is successfully installed.
 ```Bash
 python EffectiveMass.py --version
 ``` 
@@ -111,3 +111,6 @@ This script is released under GPL v3.0 license.
 
 ## Updates
 * **v2.0.0:** The calculations of hole and electron effective masses are confused in v1.x.x, and they have been corrected in v2.0.0.
+
+* **v2.0.1:** Sometimes x index in band structure end up with 0.99999... instead of 1.0, 
+which would lead to error "Unknown length of x axis" in v2.0.0 or older.
