@@ -2,20 +2,21 @@
 # -*-coding:utf-8-*-
 
 __version__ = "v2.0.1"
-__author__ = "LiuJia"
+__author__ = "Jia Liu"
 
 __str__ = """
 ********** HELP MANUSCRIPT **********
 
 [INTRODUCTION]
-  A script used to calculate effective masses of holes and electrons automatically.
+  Calculate effective masses of holes and electrons automatically. (for DMol3 and CASTEP)
+  Note that "Band structure" calculation and analyzation should be performed before running this script.
   This script is released under GPL v3.0 license.
   Current version: %s
 [AUTHOR] %s
 [WEBSITE] https://github.com/liujiacode/EffectiveMass
 
 [USAGE]
->> python EffectiveMass.py -p "project_directory" [-s "md_xsd_file"] [-c "bs_xcd_file"] [-h] [-v]
+  >> python EffectiveMass.py -p "project_directory" [-s "md_xsd_file"] [-c "bs_xcd_file"] [-h] [-v]
 
 [OUTPUT]
   This script would create a result file named "XXX Effective Mass.out" in project directory.

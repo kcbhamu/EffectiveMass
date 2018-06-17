@@ -1,8 +1,9 @@
 # EffectiveMass
-A script used to calculate effective masses of holes and electrons automatically.
+A script used to calculate effective masses of holes and electrons automatically. (for DMol3 and CASTEP) 
+Note that "Band structure" calculation and analyzation should be performed before running this script.
 
 ## Version
-EffectiveMass v2.0.1
+EffectiveMass v2.0.1.
 
 ## Python Version
 Python 3.6 or later.
@@ -100,16 +101,50 @@ The effective mass is calculated by![effective_mass](https://github.com/liujiaco
 
 5. Derivatives in this script is calculated simply without interpolation. So the results would be more accurate if **more band structure points (lower separations)** are calculated in performing **the DMol3 or CASTEP code (not this script)**. Also, you can calculate the derivatives by Origin or other softwares manually. The results calculated by Origin **might not** equal to the results calculated by this script because of different deriative-performing methods.
 
+
+
+# DensitySub
+A script used to calculate electron density difference manually. (for DMol3) 
+For CASTEP please use calculation property "Electron density difference" with "Sets of atoms". 
+Note that the total density and densities of different sets should be calculated before running this script.
+
+## Version
+DensitySub v1.0.0.
+
+## Python Version
+Python 3.6 or later.
+
+## Usage
+```bash
+python DensitySub.py -t "total_file" -s "sub_files" -a "add_files" -o "output_file" [-h] [-v]
+```
+
+#### Parameters
+* **total electron density file ("sub_files" and "add_files"):**
+  Total electron density file.
+  Note that the density files are usually hidden files with ".grd" extensions.
+
+* **electron density files ("sub_files" and "add_files"):**
+  Electron density files for subtracting and adding from/to total density.
+  The file paths should be separated by ';' without spaces.
+
+* **output density file ("output_file")**
+  For output.
+
+
+
+
 ## Author
-LiuJia
+Jia Liu
 
 ## Website
 https://github.com/liujiacode/EffectiveMass
 
 ## License
-This script is released under GPL v3.0 license.
+EffectiveMass is free software, which is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. You can redistribute it and/or modify it under the terms of the **GNU General Public License** as published by the Free Software Foundation. See the **GNU General Public License** for more details.
 
 ## Updates
+#### EffectiveMass
 * **v2.0.0:** The calculations of hole and electron effective masses are confused in v1.x.x, and they have been corrected in v2.0.0.
 
 * **v2.0.1:** Sometimes x index in band structure end up with 0.99999... instead of 1.0, 
